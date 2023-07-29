@@ -15,38 +15,47 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
 from django.urls import path, include
+from django.conf.urls.static import static
 from .views import (
     faqView,
     homeView,
     blogView,
     cartView,
     aboutView,
-    loginView,
-    signupView,
     contactView,
     productView,
     wishlistView,
     checkoutView,
+    adminPageView,
     blogDetailView,
     productDetailView,
 )
 
+from users.views import (
+    UsersListView,
+    UsersCreateView,
+    UsersUpdateView,
+    UsersDeleteView,
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin_page/', adminPageView.as_view(), name='admin_page'),
+
+    path('user/', include('users.urls')),
+
     path('', homeView.as_view(), name='index'),
     path('faq/', faqView.as_view(), name='faq'),
     path('blog/', blogView.as_view(), name='blog'),
     path('cart/', cartView.as_view(), name='cart'),
     path('about/', aboutView.as_view(), name='about'),
-    path('login/', loginView.as_view(), name='login'),
-    # path('accounts/', include('django.contrib.auth.urls')),
-    # path('accounts/', include('accounts.urls')),
-    path('signup/', signupView.as_view(), name='signup'),
+    path('user/', include('django.contrib.auth.urls')),
     path('contact/', contactView.as_view(), name='contact'),
     path('product/', productView.as_view(), name='product'),
     path('wishlist/', wishlistView.as_view(), name='wishlist'),
     path('checkout/', checkoutView.as_view(), name='checkout'),
     path('blog/detail/', blogDetailView.as_view(), name='blog_detail'),
     path('product/detail/', productDetailView.as_view(), name='product_detail'),
-]
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -33,9 +33,7 @@ class productDetailView (TemplateView):
 class wishlistView (TemplateView):
     template_name = 'user/wishlist.html'
 
-class loginView (TemplateView):
-    template_name = 'user/registration/login.html'
+class adminPageView (TemplateView):
+    template_name = 'admin/index.html'
 
-class signupView (TemplateView):
-    template_name = 'user/registration/signup.html'
 

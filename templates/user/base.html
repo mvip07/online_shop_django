@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>E-come | Multi-Purpose HTML Template for Electronics Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
 
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/utils.css' %}">
 </head>
 
 <body>
@@ -32,6 +34,22 @@
                     <button type="submit" id="searchsubmit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
+            <div class="header-sub-element row"
+                style="display: flex; align-items: center; justify-content: center; gap: 35px; margin-top: 20px;">
+                {% if user.is_authenticated %}
+                <div class="level1">
+                    <a href="#">
+                        <i class="fa-solid fa-user" style="font-size: 25px; color: #a4a4a4"></i>
+                    </a>
+                </div>
+                <div class="level1">
+                    <a href="{% url 'logout' %}">
+                        <i class="fa-solid fa-right-from-bracket" style="font-size: 25px; color: #a4a4a4"></i>
+                    </a>
+                </div>
+                {% endif %}
+
+            </div>
             <ul class="nav-home5 js-menubar">
                 <li class="level1">
                     <a href="{% url 'index' %}">Home</a>
@@ -57,7 +75,8 @@
             <div class="container container-240">
                 <div class="row flex">
                     <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 v-center header-logo">
-                        <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt="" class="img-reponsive"></a>
+                        <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""
+                                class="img-reponsive"></a>
                     </div>
                     <div class="col-lg-7 col-md-7 v-center header-search hidden-xs hidden-sm">
                         <form method="#" class="searchform ajax-search" action="#" role="search">
@@ -105,7 +124,7 @@
                                 </li>
                             </ul>
                             <div class="search-panel">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href='#'>All categories 
+                                <a class="dropdown-toggle" data-toggle="dropdown" href='#'>All categories
                                     <span class="fa fa-caret-down"></span></a>
                                 <ul id="category" class="dropdown-menu dropdown-category">
                                     <li><a href="#">TV & Video</a></li>
@@ -134,14 +153,13 @@
                                     <div class="phone">+998911662125</div>
                                 </div>
                             </div>
-                            <div class="header-sub-element row">
-                                <a class="hidden-xs hidden-sm" href="">
-                                    <img src="{% static 'img/icon-user.png' %}" alt="">
-                                </a>
+                            <div class="header-sub-element row" style="display: flex; align-items: center; gap: 5px;">
+                                {% if user.is_authenticated %}
                                 <a href="#">
                                     <img src="{% static 'img/icon-heart.png' %}" alt="">
                                 </a>
-                                <div class="cart">
+
+                                <div class="cart" style="padding-bottom: 0;">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                         aria-haspopup="true" aria-expanded="false" id="label5">
                                         <img src="{% static 'img/icon-cart.png' %}" alt="">
@@ -152,7 +170,8 @@
                                             <li class="item-cart">
                                                 <div class="product-img-wrap">
                                                     <a href="#">
-                                                        <img src="{% static 'img/cart1.jpg' %}" alt="" class="img-reponsive">
+                                                        <img src="{% static 'img/cart1.jpg' %}" alt=""
+                                                            class="img-reponsive">
                                                     </a>
                                                 </div>
                                                 <div class="product-details">
@@ -170,7 +189,8 @@
                                             <li class="item-cart">
                                                 <div class="product-img-wrap">
                                                     <a href="#">
-                                                        <img src="{% static 'img/cart1.jpg' %}" alt="" class="img-reponsive">
+                                                        <img src="{% static 'img/cart1.jpg' %}" alt=""
+                                                            class="img-reponsive">
                                                     </a>
                                                 </div>
                                                 <div class="product-details">
@@ -193,17 +213,30 @@
                                             </div>
                                             <div class="button-cart">
                                                 <a href="{% url 'cart' %}" class="cart-btn btn-viewcart">View Cart</a>
-                                                <a href="{% url 'checkout' %}" class="cart-btn e-checkout btn-gradient">Checkout</a>
+                                                <a href="{% url 'checkout' %}"
+                                                    class="cart-btn e-checkout btn-gradient">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="hidden-md hidden-lg icon-pushmenu js-push-menu sss">
-                                    <button type="button" class="icon-mobile e-icon-menu icon-pushmenu">
-                                        <span class="navbar-toggler-bar"></span>
-                                        <span class="navbar-toggler-bar"></span>
-                                        <span class="navbar-toggler-bar"></span>
+
+                                <a class="hidden-xs hidden-sm" href="#">
+                                    <i class="fa-regular fa-user" style="font-size: 25px;"></i>
+                                </a>
+
+                                <a class="hidden-xs hidden-sm" href="{% url 'logout' %}">
+                                    <i class="fa-solid fa-right-from-bracket" style="font-size: 25px;"></i>
+                                </a>
+
+                                {% else %}
+                                <a href="{% url 'login' %}" style="padding-right: 0px;">
+                                    <button type="submit" class="btn btn-submit btn-gradient" style="width: 100%;">
+                                        Login
                                     </button>
+                                </a>
+                                {% endif %}
+                                <a href="#" class="hidden-md hidden-lg icon-pushmenu js-push-menu">
+                                    <i class="fa-solid fa-bars" style="font-size: 25px;"></i>
                                 </a>
                             </div>
                         </div>
@@ -216,46 +249,55 @@
                 <div class="row flex lr2">
                     <div class="col-lg-3 widget-verticalmenu">
                         <div class="navbar-vertical">
-                            <button class="navbar-toggles navbar-drop js-vertical-menu"><span>All Departments</span></button>
+                            <button class="navbar-toggles navbar-drop js-vertical-menu">
+                                <span>All Departments</span>
+                            </button>
                         </div>
                         <div class="vertical-wrapper" style="display: none;">
                             <ul class="vertical-group">
                                 <li class="vertical-item level1 mega-parent"><a href="#">New Arrivals</a></li>
-                                <li class="vertical-item level1 mega-parent"><a href="#">Top 100 Best Seller <span class="h-ribbon e-red mg-l10">Hot</span></a></li>
+                                <li class="vertical-item level1 mega-parent"><a href="#">Top 100 Best Seller <span
+                                            class="h-ribbon e-red mg-l10">Hot</span></a></li>
                                 <li class="vertical-item level1 vertical-drop"><a href="#">TV & Video</a>
                                     <div class="menu-level-1 dropdown-menu vertical-menu v2 tvbg pd2 style1">
                                         <ul class="level1">
                                             <li class="level2 col-md-5">
-                                                    <a href="#">TVs by Type</a>
-                                                    <ul class="menu-level-2">
-                                                        <li class="level3"><a href="#" title="">4K Ultra HD</a></li>
-                                                        <li class="level3"><a href="#" title="">Smart TVs</a></li>
-                                                        <li class="level3"><a href="#" title="">LED & LCD TVs & amplifiers</a></li>
-                                                        <li class="level3"><a href="#" title="">OLED TVs</a></li>
-                                                        <li class="level3"><a href="#" title="">QLED/Quantum Dot TVs  </a></li>
-                                                    </ul>
+                                                <a href="#">TVs by Type</a>
+                                                <ul class="menu-level-2">
+                                                    <li class="level3"><a href="#" title="">4K Ultra HD</a></li>
+                                                    <li class="level3"><a href="#" title="">Smart TVs</a></li>
+                                                    <li class="level3"><a href="#" title="">LED & LCD TVs &
+                                                            amplifiers</a></li>
+                                                    <li class="level3"><a href="#" title="">OLED TVs</a></li>
+                                                    <li class="level3"><a href="#" title="">QLED/Quantum Dot TVs </a>
+                                                    </li>
+                                                </ul>
 
-                                                    <a href="#">Blu-ray & DVD Players</a>
-                                                    <ul class="menu-level-2">
-                                                        <li class="level3"><a href="#" title="">4K Blu-ray Players</a></li>
-                                                        <li class="level3"><a href="#" title="">Streaming Blu-ray Players</a></li>
-                                                        <li class="level3"><a href="#" title="">3D Blu-ray Players</a></li>
-                                                        <li class="level3"><a href="#" title="">Portable Blu-ray Players</a></li>
-                                                        <li class="level3"><a href="#" title="">DVD Recorders</a></li>
-                                                    </ul>
+                                                <a href="#">Blu-ray & DVD Players</a>
+                                                <ul class="menu-level-2">
+                                                    <li class="level3"><a href="#" title="">4K Blu-ray Players</a></li>
+                                                    <li class="level3"><a href="#" title="">Streaming Blu-ray
+                                                            Players</a></li>
+                                                    <li class="level3"><a href="#" title="">3D Blu-ray Players</a></li>
+                                                    <li class="level3"><a href="#" title="">Portable Blu-ray Players</a>
+                                                    </li>
+                                                    <li class="level3"><a href="#" title="">DVD Recorders</a></li>
+                                                </ul>
                                             </li>
                                             <li class="level2 col-md-7">
                                                 <a href="# ">Home Audio</a>
                                                 <ul class="menu-level-2">
-                                                    <li class="level3"><a href="#" title="">Home Theater Systems</a></li>
+                                                    <li class="level3"><a href="#" title="">Home Theater Systems</a>
+                                                    </li>
                                                     <li class="level3"><a href="#" title="">Soundbars</a></li>
 
                                                     <li class="level3"><a href="#" title="">Speakers</a></li>
-                                                    <li class="level3"><a href="#" title="">Receivers & Amplifiers</a></li>
+                                                    <li class="level3"><a href="#" title="">Receivers & Amplifiers</a>
+                                                    </li>
                                                     <li class="level3"><a href="#" title="">Premium Audio</a></li>
                                                 </ul>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </li>
@@ -263,22 +305,25 @@
                                     <div class="menu-level-1 dropdown-menu vertical-menu v2 homebg pd2 style1">
                                         <ul class="level1">
                                             <li class="level2 col-md-4">
-                                                    <a href="#">Home theater</a>
-                                                    <ul class="menu-level-2">
-                                                        <li class="level3"><a href="#" title="">Sound bars</a></li>
-                                                        <li class="level3"><a href="#" title="">Speakers</a></li>
-                                                        <li class="level3"><a href="#" title="">Receivers & amplifiers</a></li>
-                                                        <li class="level3"><a href="#" title="">Equalizers</a></li>
-                                                        <li class="level3"><a href="#" title="">Phono preamps  </a></li>
-                                                    </ul>
+                                                <a href="#">Home theater</a>
+                                                <ul class="menu-level-2">
+                                                    <li class="level3"><a href="#" title="">Sound bars</a></li>
+                                                    <li class="level3"><a href="#" title="">Speakers</a></li>
+                                                    <li class="level3"><a href="#" title="">Receivers & amplifiers</a>
+                                                    </li>
+                                                    <li class="level3"><a href="#" title="">Equalizers</a></li>
+                                                    <li class="level3"><a href="#" title="">Phono preamps </a></li>
+                                                </ul>
                                             </li>
                                             <li class="level2 col-md-4">
                                                 <a href="# ">Speakers</a>
                                                 <ul class="menu-level-2">
                                                     <li class="level3"><a href="#" title="">Bluetooth speakers</a></li>
-                                                    <li class="level3"><a href="#" title="">Ceiling & in-wall speakers</a></li>
+                                                    <li class="level3"><a href="#" title="">Ceiling & in-wall
+                                                            speakers</a></li>
 
-                                                    <li class="level3"><a href="#" title="">Digital music systems</a></li>
+                                                    <li class="level3"><a href="#" title="">Digital music systems</a>
+                                                    </li>
                                                     <li class="level3"><a href="#" title="">Outdoor</a></li>
                                                     <li class="level3"><a href="#" title="">Satellite speakers</a></li>
                                                 </ul>
@@ -286,11 +331,13 @@
                                             <li class="level2 col-md-4">
                                                 <a href="#">Accessories</a>
                                                 <ul class="menu-level-2">
-                                                    <li class="level3"><a href="#" title="">Receivers & amplifiers</a></li>
+                                                    <li class="level3"><a href="#" title="">Receivers & amplifiers</a>
+                                                    </li>
                                                     <li class="level3"><a href="#" title="">Cd & tape players</a></li>
                                                     <li class="level3"><a href="#" title="">Tuners</a></li>
                                                     <li class="level3"><a href="#" title="">Curntables</a></li>
-                                                    <li class="level3"><a href="#" title="">Receivers & adapters</a></li>
+                                                    <li class="level3"><a href="#" title="">Receivers & adapters</a>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -311,26 +358,26 @@
                                     </div>
                                 </li>
                                 <li class="vertical-item level1 vertical-drop"><a href="#">Cell Phones & Accessories</a>
-                                 <div class="menu-level-1 dropdown-menu vertical-menu v2 phonebg pd2 style1">
+                                    <div class="menu-level-1 dropdown-menu vertical-menu v2 phonebg pd2 style1">
                                         <ul class="level1">
                                             <li class="level2 col-md-4">
-                                                    <a href="#">Cell Phones</a>
-                                                    <ul class="menu-level-2">
-                                                        <li class="level3"><a href="#" title="">Samsung Galaxy S8</a></li>
-                                                        <li class="level3"><a href="#" title="">iPhone 7/7 Plus</a></li>
-                                                        <li class="level3"><a href="#" title="">iPhone 6</a></li>
-                                                        <li class="level3"><a href="#" title="">Samsung Galaxy S7</a></li>
-                                                        <li class="level3"><a href="#" title="">Unlocked Phones</a></li>
-                                                    </ul>
+                                                <a href="#">Cell Phones</a>
+                                                <ul class="menu-level-2">
+                                                    <li class="level3"><a href="#" title="">Samsung Galaxy S8</a></li>
+                                                    <li class="level3"><a href="#" title="">iPhone 7/7 Plus</a></li>
+                                                    <li class="level3"><a href="#" title="">iPhone 6</a></li>
+                                                    <li class="level3"><a href="#" title="">Samsung Galaxy S7</a></li>
+                                                    <li class="level3"><a href="#" title="">Unlocked Phones</a></li>
+                                                </ul>
 
-                                                    <a href="#">Cases</a>
-                                                    <ul class="menu-level-2">
-                                                        <li class="level3"><a href="#" title="">4Armbands</a></li>
-                                                        <li class="level3"><a href="#" title="">Armbands</a></li>
-                                                        <li class="level3"><a href="#" title="">Cases</a></li>
-                                                        <li class="level3"><a href="#" title="">Flip Cases</a></li>
-                                                        <li class="level3"><a href="#" title="">Holsters & Clips</a></li>
-                                                    </ul>
+                                                <a href="#">Cases</a>
+                                                <ul class="menu-level-2">
+                                                    <li class="level3"><a href="#" title="">4Armbands</a></li>
+                                                    <li class="level3"><a href="#" title="">Armbands</a></li>
+                                                    <li class="level3"><a href="#" title="">Cases</a></li>
+                                                    <li class="level3"><a href="#" title="">Flip Cases</a></li>
+                                                    <li class="level3"><a href="#" title="">Holsters & Clips</a></li>
+                                                </ul>
                                             </li>
                                             <li class="level2 col-md-8">
                                                 <a href="# ">Accessories</a>
@@ -352,25 +399,25 @@
                                                     <li class="level3"><a href="#" title="">Wearable Technology</a></li>
                                                 </ul>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </li>
                                 <li class="vertical-item level1 vertical-drop"><a href="#">Headphones</a>
-                                <div class="menu-level-1 dropdown-menu vertical-menu v2 headphonebg pd3 style1">
+                                    <div class="menu-level-1 dropdown-menu vertical-menu v2 headphonebg pd3 style1">
                                         <ul class="level1">
 
                                             <li class="level2 col-md-6">
-                                                    <a href="#">Headphones</a>
-                                                    <ul class="menu-level-2">
-                                                        <li class="level3"><a href="#" title="">In-Ear & Earbud</a></li>
-                                                        <li class="level3"><a href="#" title="">On-Ear</a></li>
-                                                        <li class="level3"><a href="#" title="">Over-Ear</a></li>
-                                                        <li class="level3"><a href="#" title="">Wireless</a></li>
-                                                        <li class="level3"><a href="#" title="">Sports & Fitness</a></li>
-                                                    </ul>
+                                                <a href="#">Headphones</a>
+                                                <ul class="menu-level-2">
+                                                    <li class="level3"><a href="#" title="">In-Ear & Earbud</a></li>
+                                                    <li class="level3"><a href="#" title="">On-Ear</a></li>
+                                                    <li class="level3"><a href="#" title="">Over-Ear</a></li>
+                                                    <li class="level3"><a href="#" title="">Wireless</a></li>
+                                                    <li class="level3"><a href="#" title="">Sports & Fitness</a></li>
+                                                </ul>
 
-                                                    
+
                                             </li>
                                             <li class="level2 col-md-6">
                                                 <a href="# ">Speaker System</a>
@@ -379,13 +426,14 @@
                                                     <li class="level3"><a href="#" title="">Sound Bars</a></li>
 
                                                     <li class="level3"><a href="#" title="">Surround Sound</a></li>
-                                                    <li class="level3"><a href="#" title="">Receivers & Amplifiers</a></li>
+                                                    <li class="level3"><a href="#" title="">Receivers & Amplifiers</a>
+                                                    </li>
                                                     <li class="level3"><a href="#" title="">Equalizers</a></li>
                                                 </ul>
 
-                                                
+
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </li>
@@ -417,31 +465,38 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="vertical-item level1 vertical-drop mega-parent"><a href="#">All categlories</a>
+                                <li class="vertical-item level1 vertical-drop mega-parent"><a href="#">All
+                                        categlories</a>
                                     <div class="menu-level-1 dropdown-menu vertical-menu v2 pd">
                                         <div class="row">
                                             <div class="col-md-4 text-center cate-item">
-                                                <a href="#"><img src="{% static 'img/megamenu/cate1.jpg' %}" alt="" class="img-reponsive"></a>
+                                                <a href="#"><img src="{% static 'img/megamenu/cate1.jpg' %}" alt=""
+                                                        class="img-reponsive"></a>
                                                 <h3><a href="#">Mirrorless Cameras</a></h3>
                                             </div>
                                             <div class="col-md-4 text-center cate-item">
-                                                <a href="#"><img src="{% static 'img/megamenu/cate2.jpg' %}" alt="" class="img-reponsive"></a>
+                                                <a href="#"><img src="{% static 'img/megamenu/cate2.jpg' %}" alt=""
+                                                        class="img-reponsive"></a>
                                                 <h3><a href="#">Lenses</a></h3>
                                             </div>
                                             <div class="col-md-4 text-center cate-item">
-                                                <a href="#"><img src="{% static 'img/megamenu/cate3.jpg' %}" alt="" class="img-reponsive"></a>
+                                                <a href="#"><img src="{% static 'img/megamenu/cate3.jpg' %}" alt=""
+                                                        class="img-reponsive"></a>
                                                 <h3><a href="#">Photography Drones</a></h3>
                                             </div>
                                             <div class="col-md-4 text-center cate-item">
-                                                <a href="#"><img src="{% static 'img/megamenu/cate4.jpg' %}" alt="" class="img-reponsive"></a>
+                                                <a href="#"><img src="{% static 'img/megamenu/cate4.jpg' %}" alt=""
+                                                        class="img-reponsive"></a>
                                                 <h3><a href="#">Sports & Action Cameras</a></h3>
                                             </div>
                                             <div class="col-md-4 text-center cate-item">
-                                                <a href="#"><img src="{% static 'img/megamenu/cate5.jpg' %}" alt="" class="img-reponsive"></a>
+                                                <a href="#"><img src="{% static 'img/megamenu/cate5.jpg' %}" alt=""
+                                                        class="img-reponsive"></a>
                                                 <h3><a href="#">Optics</a></h3>
                                             </div>
                                             <div class="col-md-4 text-center cate-item">
-                                                <a href="#"><img src="{% static 'img/megamenu/cate6.jpg' %}" alt="" class="img-reponsive"></a>
+                                                <a href="#"><img src="{% static 'img/megamenu/cate6.jpg' %}" alt=""
+                                                        class="img-reponsive"></a>
                                                 <h3><a href="#">Accessories</a></h3>
                                             </div>
                                         </div>
@@ -499,7 +554,8 @@
                     </div>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/macbook.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/macbook.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -508,7 +564,8 @@
                     </div>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/flycam.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/flycam.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -520,7 +577,8 @@
                     <h1 class="cate-title">Top Rated Products</h1>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/samsung.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/samsung.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -529,7 +587,8 @@
                     </div>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/headphone2.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/headphone2.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -538,7 +597,8 @@
                     </div>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/anker.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/anker.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -550,7 +610,8 @@
                     <h1 class="cate-title">Top Selling Products</h1>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/headphone.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/headphone.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -559,7 +620,8 @@
                     </div>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/samsung2.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/samsung2.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -568,7 +630,8 @@
                     </div>
                     <div class="cate-item">
                         <div class="product-img">
-                            <a href="#"><img src="{% static 'img/product/sound.jpg' %}" alt="" class="img-reponsive"></a>
+                            <a href="#"><img src="{% static 'img/product/sound.jpg' %}" alt=""
+                                    class="img-reponsive"></a>
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><a href="#">Epson Home Cinema 5040UB </a></h3>
@@ -681,12 +744,34 @@
         </div>
     </footer>
     <a href="#" class="btn-gradient scroll_top"><i class="ion-ios-arrow-up"></i></a>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/countdown.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfhtZN7ZukEAEQcgR_GszRE4x338Bu9M&callback=initMap">
+        </script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+
+            $('.js-product-360').ThreeSixty({
+                totalFrames: 18, // Total no. of image you have for 360 slider
+                endFrame: 18, // end frame for the auto spin animation
+                currentFrame: 1, // This the start frame for auto spin
+                imgList: '.threesixty_images', // selector for image list
+                progress: '.spinner', // selector to show the loading progress
+                imagePath: 'img/product-360/', // path of the image assets
+                filePrefix: '', // file prefix if any
+                ext: '.jpg', // extention for the assets
+                // responsive: true,
+                navigation: true
+
+            });
+        });
+    </script>
 </body>
-<script src="{% static 'js/jquery.js' %}"></script>
-<script src="{% static 'js/bootstrap.js' %}"></script>
-<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'js/slick.js' %}"></script>
-<script src="{% static 'js/countdown.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfhtZN7ZukEAEQcgR_GszRE4x338Bu9M&callback=initMap"></script>
+
 </html>
