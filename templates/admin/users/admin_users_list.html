@@ -5,8 +5,8 @@
 <div class="container container-240">
     <div class="team">
         <div style="display: flex; align-items: center; margin-top: 30px;">
-            <div class="col-lg-10 col-md-10 v-center header-search" style="padding: 0;">
-                <form name="q" method="get">{% csrf_token %}
+            <div class="col-lg-10 col-md-10 v-center header-search hidden-xs" style="padding: 0;">
+                <form name="selected" method="POST">{% csrf_token %}
                     <input type="search" class="form-control" style="width: 100%;" placeholder="Searching user...">
                     <div class="search-panel" style="width: 260px;">
                         <select id="category" class="dropdown-category" style="margin: 0 10px 0 0; padding: 10px 5px;">
@@ -41,7 +41,9 @@
                             <div class="pd-bd product-inner">
                                 <div class="product-img">
                                     <a href="{% url 'user_detail' user.pk %}">
-                                        <img src="{{user.image.url}}" alt="" class="img-reponsive">
+                                        {% if user.image %}
+                                            <img src="{{user.image.url}}" alt="" width="225px" height="225px" class="img-reponsive" style="margin:  0 auto;">
+                                        {% endif %}
                                     </a>
                                     {% if user.block %}
                                     <div class="ribbon-price red"><span>{{user.block}}</span></div>
@@ -53,10 +55,11 @@
                                 <div class="product-info">
                                     <div class="color-group"></div>
                                     <div class="element-list element-list-middle">
-                                        <p class="product-cate">{{user.username}}</p>
+                                        <p class="product-cate">{{user.title}}</p>
                                         <h3 class="product-title">
-                                            <a href="{% url 'user_detail' user.pk %}">{{user.first_name}}
-                                                {{user.last_name}}</a>
+                                            <a href="{% url 'user_detail' user.pk %}">
+                                                {{user.first_name}} {{user.last_name}}
+                                            </a>
                                         </h3>
                                         <div class="product-bottom">
                                             <div class="product-price"><span>{{user.phone}}</span></div>
@@ -91,6 +94,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

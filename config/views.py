@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
 
 class homeView (TemplateView):
     template_name = 'user/index.html'
@@ -33,7 +34,7 @@ class productDetailView (TemplateView):
 class wishlistView (TemplateView):
     template_name = 'user/wishlist.html'
 
-class adminPageView (TemplateView):
-    template_name = 'admin/index.html'
+class PageView (TemplateView):
+    template_name = 'admin/admin_index.html'
 
 

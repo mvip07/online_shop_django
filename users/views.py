@@ -7,10 +7,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest, HttpResponse
-from django.contrib.auth.hashers import make_password
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import FormView, ListView, TemplateView, DetailView
-from .forms import RegisterForm, ResetPasswordForm, VerifyForm, ResetPasswordCompleteForm
+from .forms import RegisterForm, UsersUpdateForm, ResetPasswordForm, VerifyForm, ResetPasswordCompleteForm
 # Create your views here.
 
 class LoginViews (LoginView):
@@ -32,22 +31,19 @@ class UsersListView (ListView):
     model = CustomUser
     queryset = CustomUser.objects.all()
     template_name = 'admin/users/admin_users_list.html'
-    context_object_name = 'users'
+    context_object_name = 'users'      
 
     def get (self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        print("kiii")
-        if 'q' in request.GET:
-            q = request.GET['q']
-            print(q)
-            data = CustomUser.objects.filter(first_name__icontains=q)
-        else:
-            data = CustomUser.objects.all()
-            
-        context = {
-            'data': data
-        }
+        if request.method == "POST":
+            print('38')
+            searchSelected = request.POST.get('selected')
+            empsearch = CustomUser.objects.filter(last_name=searchSelected) 
 
-        return render(request, self.template_name, context)        
+            return render (request, 'admin/users/admin_users_list.html', {'users': empsearch})
+
+        else:
+            displayemp=CustomUser.objects.all()
+            return render (request, 'admin/users/admin_users_list.html', {'users': displayemp})
 
 class UsersCreateView (CreateView):
     form_class = RegisterForm
@@ -67,7 +63,7 @@ class UsersUpdateView (UpdateView):
     model = CustomUser
     template_name = 'admin/users/admin_users_update.html'
     fields = ['first_name', 'last_name', 'username', 'email', 'phone', 'password', 'image', 'block', 'is_staff', 'is_superuser']
-    success_url = reverse_lazy('user_list')
+    success_url = '/user/list'
 
 class UsersDetailView (DetailView):
     model = CustomUser
@@ -112,7 +108,7 @@ class UsersPasswordResetVerifyView (FormView):
             return super().dispatch(request, *args, **kwargs)
         return redirect('/404/')
 
-class UsersPasswordResetCompleteView(FormView):
+class UsersPasswordResetCompleteView (FormView):
     form_class = ResetPasswordCompleteForm
     template_name = "user/auth/password_reset_confirm.html"
     success_url = '/'

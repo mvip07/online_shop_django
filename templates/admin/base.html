@@ -40,28 +40,39 @@
                     <a href="#">
                         <i class="fa-solid fa-user" style="font-size: 25px; color: #a4a4a4"></i>
                     </a>
-                </div>
-                                        
+                </div>             
                 {% endif %}
-                
             </div>
             <ul class="nav-home5 js-menubar">
                 <li class="level1">
                     <a href="{% url 'index' %}">Home</a>
                 </li>
+                
                 <li class="level1">
-                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'user_list' %}">Users</a>
                 </li>
                 <li class="level1">
-                    <a href="{% url 'blog' %}">Blog</a>
+                    <a href="{% url 'about_list' %}">Abouts</a>
                 </li>
                 <li class="level1">
-                    <a href="{% url 'contact' %}">Contact</a>
+                    <a href="{% url 'blog_list' %}">Blogs</a>
                 </li>
                 <li class="level1">
-                    <a href="{% url 'faq' %}">Faqs</a>
+                    <a href="{% url 'category_list' %}">Categories</a>
                 </li>
-            </ul>
+                <li class="level1">
+                    <a href="{% url 'ad_list' %}">Ads</a>
+                </li>
+                <li class="level1">
+                    <a href="{% url 'brand_list' %}">Brands</a>
+                </li>
+                <li class="level1">
+                    <a href="{% url 'sponsor_list' %}">Sponsors</a>
+                </li>
+                <li class="level1">
+                    <a href="{% url 'faq_list' %}">Faqs</a>
+                </li>
+            </ul>  
         </div>
     </div>
 
@@ -186,14 +197,27 @@
                                         <li class="level1">
                                             <a href="{% url 'index' %}">Home</a>
                                         </li>
+                                       
                                         <li class="level1">
-                                            <a href="{% url 'about' %}">Admin Page</a>
+                                            <a href="{% url 'user_list' %}">Users</a>
                                         </li>
                                         <li class="level1">
-                                            <a href="{% url 'blog' %}">Users</a>
+                                            <a href="{% url 'about_list' %}">Abouts</a>
                                         </li>
                                         <li class="level1">
-                                            <a href="{% url 'contact' %}">Contact</a>
+                                            <a href="{% url 'blog_list' %}">Blogs</a>
+                                        </li>
+                                        <li class="level1">
+                                            <a href="{% url 'category_list' %}">Categories</a>
+                                        </li>
+                                        <li class="level1">
+                                            <a href="{% url 'ad_list' %}">Ads</a>
+                                        </li>
+                                        <li class="level1">
+                                            <a href="{% url 'brand_list' %}">Brands</a>
+                                        </li>
+                                        <li class="level1">
+                                            <a href="{% url 'sponsor_list' %}">Sponsors</a>
                                         </li>
                                         <li class="level1">
                                             <a href="{% url 'faq' %}">Faqs</a>
@@ -313,16 +337,15 @@
             </div>
         </div>
     </footer>
-    <a href="#" class="btn-gradient scroll_top"><i class="ion-ios-arrow-up"></i></a>
-    <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/slick.js' %}"></script>
-    <script src="{% static 'js/countdown.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfhtZN7ZukEAEQcgR_GszRE4x338Bu9M&callback=initMap">
-        </script>
 </body>
-
+<a href="#" class="btn-gradient scroll_top"><i class="ion-ios-arrow-up"></i></a>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/slick.js' %}"></script>
+<script src="{% static 'js/countdown.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfhtZN7ZukEAEQcgR_GszRE4x338Bu9M&callback=initMap">
+    </script>
 </html>

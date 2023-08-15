@@ -525,6 +525,11 @@
                                         <li class="level1">
                                             <a href="{% url 'faq' %}">Faqs</a>
                                         </li>
+                                        {% if user.is_superuser %}
+                                            <li class="level1">
+                                                <a href="{% url 'admin_panel' %}">Admin</a>
+                                            </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </nav>
@@ -753,25 +758,6 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfhtZN7ZukEAEQcgR_GszRE4x338Bu9M&callback=initMap">
         </script>
-    <script>
-        jQuery(document).ready(function ($) {
-
-
-            $('.js-product-360').ThreeSixty({
-                totalFrames: 18, // Total no. of image you have for 360 slider
-                endFrame: 18, // end frame for the auto spin animation
-                currentFrame: 1, // This the start frame for auto spin
-                imgList: '.threesixty_images', // selector for image list
-                progress: '.spinner', // selector to show the loading progress
-                imagePath: 'img/product-360/', // path of the image assets
-                filePrefix: '', // file prefix if any
-                ext: '.jpg', // extention for the assets
-                // responsive: true,
-                navigation: true
-
-            });
-        });
-    </script>
 </body>
 
 </html>

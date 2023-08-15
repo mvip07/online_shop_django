@@ -19,43 +19,41 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 from .views import (
-    faqView,
     homeView,
-    blogView,
     cartView,
     aboutView,
     contactView,
     productView,
     wishlistView,
     checkoutView,
-    adminPageView,
-    blogDetailView,
+    PageView,
     productDetailView,
-)
-
-from users.views import (
-    UsersListView,
-    UsersCreateView,
-    UsersUpdateView,
-    UsersDeleteView,
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin_page/', adminPageView.as_view(), name='admin_page'),
+    path('panel/', PageView.as_view(), name='admin_panel'),
 
+    path('ad/', include('ad.urls')),
+    path('faq/', include('faq.urls')),
+    path('blog/', include('blog.urls')),
     path('user/', include('users.urls')),
+    path('about/', include('about.urls')),
+    path('brand/', include('brand.urls')),
+    path('sponsor/', include('sponsor.urls')),
+    path('category/', include('category.urls')),
 
     path('', homeView.as_view(), name='index'),
-    path('faq/', faqView.as_view(), name='faq'),
-    path('blog/', blogView.as_view(), name='blog'),
     path('cart/', cartView.as_view(), name='cart'),
-    path('about/', aboutView.as_view(), name='about'),
     path('user/', include('django.contrib.auth.urls')),
     path('contact/', contactView.as_view(), name='contact'),
     path('product/', productView.as_view(), name='product'),
     path('wishlist/', wishlistView.as_view(), name='wishlist'),
     path('checkout/', checkoutView.as_view(), name='checkout'),
-    path('blog/detail/', blogDetailView.as_view(), name='blog_detail'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
     path('product/detail/', productDetailView.as_view(), name='product_detail'),
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+] 
+
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

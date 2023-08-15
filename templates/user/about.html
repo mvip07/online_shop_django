@@ -3,7 +3,6 @@
 
 {% block content %}
 <div class="wrappage">
-
     <div class="container container-240">
         <ul class="breadcrumb">
             <li><a href="#">Home</a></li>
@@ -11,12 +10,35 @@
         </ul>
     </div>
     <div class="aboutus">
-        <div class="container container-240">
-            <div class="about-img spc2">
-                <img src="{% static 'img/about/about_1.jpg' %}" alt="" class="img-responsive">
+        <div class="all-s" style="width: 100%;">
+            <div class="container container-240">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 set-flex ">
+                        <div class="slide-home3">
+                            <div class="e-slide v2 js-slider-3items">
+                                {% for file in files %}
+                                {% if file.image.url|slice:'-3:' != "mp4" %}
+                                <div class="e-slide-img">
+                                    <a href="#">
+                                        <img class="response_file" src="{{ file.image.url }}" alt="">
+                                    </a>
+                                </div>
+                                {% else %}
+                                <div class="e-slide-img">
+                                    <a href="#">
+                                        <video class="response_file" width="100%" controls muted  >
+                                            <source src="{{ file.image.url }}" type="video/mp4" />
+                                        </video>
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
         <div class="about-content">
             <div class="container container-240">
                 <div class="entry-inside v4 text-center">
@@ -24,36 +46,7 @@
                     <h1 class="entry-title v2 spc">Multi-Purpose WooCommerce Theme for Electronics Store </h1>
                 </div>
             </div>
-            <div class="container container-240">
-                <div class="row pd1">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <h3 class="about-title spc">Our vision</h3>
-                        <p class="about-desc spc">It is a long established fact that a reader will be distracted by the
-                            readable content of a page when<br> looking at its layout. The point of using Lorem Ipsum is
-                            that it has a more-or-less normal distribution of<br> letters, as opposed to using 'Content
-                            here, content here', making it look like readable English. Many desktop publishing packages
-                            and web page editors now use Lorem Ipsum as their default model text, </p>
-                        <div class="about-img">
 
-                            <img src="{% static 'img/about/about_2.jpg' %}" alt="" class="img-responsive">
-
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <h3 class="about-title spc">Our vision</h3>
-                        <p class="about-desc spc">It is a long established fact that a reader will be distracted by the
-                            readable content of a page when<br> looking at its layout. The point of using Lorem Ipsum is
-                            that it has a more-or-less normal distribution of<br> letters, as opposed to using 'Content
-                            here, content here', making it look like readable English. Many desktop publishing packages
-                            and web page editors now use Lorem Ipsum as their default model text, </p>
-                        <div class="about-img">
-
-                            <img src="{% static 'img/about/about_3.jpg' %}" alt="" class="img-responsive">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="bg-gradient">
                 <div class="container container-240">
                     <div class="row pd2">
@@ -84,55 +77,43 @@
                     </div>
                 </div>
             </div>
+            
             <div class="container container-240">
                 <div class="team">
                     <h1 class="about-title v3 spc text-center">Our teams</h1>
-                    <div class="owl-carousel owl-theme js-owl-team">
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="{% static 'img/about/team_1.jpg' %}" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 class="team-name">Robert Smith</h3>
-                                <p class="team-career">Director</p>
-                                <p class="team-desc">Radable content of a page when looking at its layout. The point of
-                                    using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-                            </div>
-                        </div>
-
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="{% static 'img/about/team_2.jpg' %}" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 class="team-name">Rudy Reeves</h3>
-                                <p class="team-career">CEO</p>
-                                <p class="team-desc">Radable content of a page when looking at its layout. The point of
-                                    using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-                            </div>
-                        </div>
-
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="{% static 'img/about/team_3.jpg' %}" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 class="team-name">Sandra Hale</h3>
-                                <p class="team-career">Designer</p>
-                                <p class="team-desc">Radable content of a page when looking at its layout. The point of
-                                    using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-                            </div>
-                        </div>
-
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="{% static 'img/about/team_4.jpg' %}" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 class="team-name">Brandon Vasquez</h3>
-                                <p class="team-career">Director</p>
-                                <p class="team-desc">Radable content of a page when looking at its layout. The point of
-                                    using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
+                    <div class="releases v2" style="padding-top: 0;">
+                        <div class="tab-content">
+                            <div id="tv2" class="tab-pane fade in active">
+                                <div class="js-multiple-row2">
+                                    {% for member in members %}
+                                    <div class="product-item">
+                                        <div class="pd-bd product-inner">
+                                            <div class="product-img">
+                                                <a href="#">
+                                                    <img src="{{ member.image.url }}" alt=""
+                                                        class="img-reponsive" width="225px" height="225px">
+                                                </a>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="color-group"></div>
+                                                <div class="element-list element-list-middle">
+                                                    <p class="product-cate">{{member.job}}</p>
+                                                    <h3 class="product-title">
+                                                        <a href="#" style="font-size: 20px;">{{member.first_name}} {{member.last_name}}</a>
+                                                    </h3>
+                                                    <p style="font-size: 12px;">{{member.phone}}</p>
+                                                    <div class="product-bottom">
+                                                        <div></div>
+                                                        <a href="#" class="btn-icon btn-view">
+                                                            <span class="icon-bg icon-view"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </div>

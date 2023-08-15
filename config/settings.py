@@ -37,8 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
+    'ad',
+    'faq',
+    'blog',
     'users',
+    'about',
+    'brand',
+    'sponsor',
+    'ckeditor',
+    'category',
 ]
 
 MIDDLEWARE = [
@@ -114,26 +121,26 @@ USE_I18N = True
 USE_TZ = True
 
 
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'full',
-#     },
-# }
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+    },
+}
 
-# CKEDITOR_UPLOAD_PATH = 'uploads/'
-# CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_UPLOAD_PATH = '/uploads/'
+CKEDITOR_RESTRICT_BY_USER = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
-# STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Upload files (saving is images)
-MEDIA_URL = 'uploads/'
+MEDIA_URL = '/uploads/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('uploads'))
 
 

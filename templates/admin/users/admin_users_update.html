@@ -1,11 +1,11 @@
-{% extends 'user/base.html' %}
+{% extends 'admin/base.html' %}
 {% load static %}
 
 {% block content %}
 <div class="container container-240">
     <div class="myaccount">
         <ul class="breadcrumb v3">
-            <li><a href="{ url 'user_list' }">User List</a></li>
+            <li><a href="{% url 'user_list' %}">User List</a></li>
             <li class="active">Update User</li>
         </ul>
         <div class="row pd">
@@ -14,7 +14,7 @@
                     <h1 class="page-title v1">Update User</h1>
                 </div>
                 <div class="page-content">
-                    <form class="login-form" method="post" action="">{%csrf_token %}
+                    <form class="login-form" method="post" enctype="multipart/form-data">{%csrf_token %}
                         <div class="form-group">
                             {% for field in form %}
                             {% if field.auto_id == "id_image" %}
@@ -39,10 +39,8 @@
 
                         </div>
                         <div class="flex" style="gap: 10px;">
-                            <a href="{ url 'user_list'}">
-                                <button class="btn btn-submit btn-gradient" style="width: 100%; padding: 0 24px;">
-                                    <i class="fa-solid fa-left-long"></i> Go Back
-                                </button>
+                            <a href="{% url 'user_list' %}" class="btn btn-submit btn-gradient" style="padding: 0 24px;">
+                                <i class="fa-solid fa-left-long"></i> Go Back
                             </a>
                             <button type="submit" class="btn btn-submit btn-gradient" style="width: 100%;">
                                 Update User

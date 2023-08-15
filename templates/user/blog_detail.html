@@ -13,51 +13,39 @@
                 <div class="blog-content  col-md-9  col-xs-12">
                     <div class="blog-post-item v2">
                         <div class="blog-img">
-                            <a href="#" class="hover-images">
-                                <img src="{% static 'img/blog/single-post.jpg' %}" alt="" class="img-reponsive">
+                            <a href="#" class="js-single-post">
+                                {% for blog_image in blog_images %}
+                                {% if blog_image.blog.pk == blog.pk %}
+                                {% if blog_image.image.url|slice:"-3:" != "mp4" %}
+                                <img src="{{blog_image.image.url}}" alt="" height="500px" class="response_file">
+                                {% else %}
+                                <video controls muted height="500px" class="response_file">
+                                    <source src="{{blog_image.image.url}}" />
+                                </video>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
                             </a>
                             <div class="blog-post-date e-gradient abs v2">
-                                <span class="b-date">14</span>
-                                <span class="b-month">dec</span>
+                                <span class="b-date">{{blog.created_at|date:"d"}}</span>
+                                <span class="b-month">{{blog.created_at|date:"b"}}</span>
                             </div>
                         </div>
                         <div class="blog-info-bd">
                             <div class="blog-info">
-                                <h3 class="blog-post-title v2">Ricoh's latest spherical camera nets quality images</h3>
+                                <h3 class="blog-post-title v2">
+                                    <a href="#">{{blog.title}}</a>
+                                </h3>
                                 <div class="blog-post-desc">
-                                    <p>We may encounter many defeats but we must not be defeated.<br>There are many
-                                        variations of passages of Lorem Ipsum available, but the majority have suffered
-                                        alteration in some form, by injected humour, or randomised words which don't
-                                        look even slightly believable. If you are going to use a passage of Lorem Ipsum,
-                                        you need to be sure there isn't anything embarrassing hidden in the middle of
-                                        text. All the lorem ipsum generators on the internet tend to repeat predefined
-                                        chunks as necessary, making this the first true generator on the Internet. It
-                                        uses a dictionary of over 200 Latin words, combined with a handful of model
-                                        sentence structures, to generate Lorem Ipsum which looks reasonable. The
-                                        generated Lorem Ipsum is therefore always free from repetition, injected humour.
-                                    </p>
-                                    <p>If you don't like how things are, change it! You're not a tree.<br>Lorem Ipsum is
-                                        simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                                        the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                        took a galley of type and scrambled it to make a type specimen book. It has
-                                        survived not only five centuries, but also the leap into electronic typesetting,
-                                        remaining essentially unchanged. It was popularised in the 1960s with the
-                                        release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                        with desktop publishing software like aldus pagemaker including versions. Lorem
-                                        Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    {{blog.description|safe}}
                                 </div>
                             </div>
                             <div class="blog-post-author v2">
-                                <div class="blog-post-tags">
-                                    <a href="#">Design</a>,<a href="#">Tecnology</a>
+                                <div class="blog-post-tags v2">
+                                    <div class="author">{{blog.created_at}}</div>
                                 </div>
 
-                                <div class="blog-post-social">
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                </div>
+                                <div class="blog-post-comment"><span class="c-black"></span>2</div>
                             </div>
                         </div>
                     </div>
@@ -80,73 +68,28 @@
                         </div>
                         <div class="blog-comment">
                             <div class="cmt-title text-center abs">
-                                <h1 class="oval-bd">Comments (3)</h1>
+                                <h1 class="oval-bd">Comments ({{blog_comments|length}})</h1>
                             </div>
                             <ul>
-                                <li>
+                                {% for blog_comment in blog_comments %}
+                                <li class="bd-7" style="margin: 10px 0;">
                                     <div class="blog-comment-item">
                                         <div class="cmt-img">
-                                            <img src="{% static 'img/blog/author2.jpg' %}" alt="">
+                                            <img src="{{blog_comment.user.image.url}}" style="max-width: 140px; max-height: 140px; border-radius: 50%;" alt="">
                                         </div>
                                         <div class="cmt-content">
                                             <div class="wrp-name">
                                                 <div class="wrp-element">
-                                                    <span class="name">Robert Havard</span>
-                                                    <a href="#"><i class="fa fa-reply"></i></a>
+                                                    <span class="name">{{blog_comment.user.first_name}} {{blog_comment.user.last_name}}</span>
+                                                    <!-- <a href="#"><i class="fa fa-reply"></i></a> -->
                                                 </div>
-                                                <span class="date">Dec 02, 2018, 6:05 pm</span>
+                                                <span class="date">{{blog_comment.created_at}}</span>
                                             </div>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's<br> standard dummy text
-                                                ever since the 1500s, when an unknown printer took a galley of type and
-                                                scrambled it to make a type specimen book. It has survived not only five
-                                                centuries..</p>
-
+                                            <p>{{blog_comment.message}}</p>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="blog-comment-item">
-                                        <div class="cmt-img">
-                                            <img src="{% static 'img/blog/author3.jpg' %}" alt="">
-                                        </div>
-                                        <div class="cmt-content">
-                                            <div class="wrp-name">
-                                                <div class="wrp-element">
-                                                    <span class="name">Robert Havard</span>
-                                                    <a href="#"><i class="fa fa-reply"></i></a>
-                                                </div>
-                                                <span class="date">Dec 02, 2018, 6:05 pm</span>
-                                            </div>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the<br> industry's standard dummy text
-                                                ever since the 1500s, when an unknown printer took a galley of type and
-                                                scrambled it to make a type specimen book. It has survived not only five
-                                                centuries..</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="blog-comment-item">
-                                        <div class="cmt-img">
-                                            <img src="{% static 'img/blog/author4.jpg' %}" alt="">
-                                        </div>
-                                        <div class="cmt-content">
-                                            <div class="wrp-name">
-                                                <div class="wrp-element">
-                                                    <span class="name">Robert Havard</span>
-                                                    <a href="#"><i class="fa fa-reply"></i></a>
-                                                </div>
-                                                <span class="date">Dec 02, 2018, 6:05 pm</span>
-                                            </div>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's<br> standard dummy text
-                                                ever since the 1500s, when an unknown printer took a galley of type and
-                                                scrambled it to make a type specimen book. It has survived not only five
-                                                centuries..</p>
-                                        </div>
-                                    </div>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="blog-comment-bottom">
@@ -154,34 +97,26 @@
                                 <h1 class="oval-bd">Leave a comment</h1>
                             </div>
                             <div class="cmt-form">
-                                <div class="login-form">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-6 col-xs-12">
-                                                <input type="text" id="author" class="form-control bdr"
-                                                    name="comment[author]" value="" placeholder="Name *">
-                                            </div>
-                                            <div class="col-md-6 col-xs-12">
-                                                <input type="email" id="email" class="form-control bdr"
-                                                    name="comment[email]" value="" placeholder="Name *">
-                                            </div>
-                                        </div>
-                                    </div>
+                                <form class="login-form" action="/blog/comment/create/{{blog.pk}}" method="post">
+                                    {% csrf_token %}
+                                    {% for field in form %}
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <textarea id="message" class="form-control bdr2" name="comment[body]"
-                                                    rows="12" placeholder="Enter your comment here..."></textarea>
+                                                {{field}}
                                             </div>
                                         </div>
                                     </div>
-
+                                    {% if field.errors %}
+                                    <small>{{ field.errors|striptags }}</small>
+                                    {% endif %}
+                                    {% endfor %}
                                     <div class="form-group text-center">
                                         <button type="submit" class="btn btn-submit btn-gradient">
                                             Send message
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
